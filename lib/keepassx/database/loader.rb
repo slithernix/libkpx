@@ -66,7 +66,8 @@ module Keepassx
         @locked = false
 
         true
-      rescue OpenSSL::Cipher::CipherError
+      rescue OpenSSL::Cipher::CipherError => e
+        puts e.message
         false
       end
       # rubocop:enable Metrics/MethodLength
@@ -114,8 +115,8 @@ module Keepassx
             @encrypted_payload = ''
             @locked            = false
           else
-            @header            = Header.new(db[0..124])
-            @encrypted_payload = db[124..-1]
+            @header            = Header.new(db)
+            @encrypted_payload = db[@header.total_bytes_read..-1]
             @locked            = true
           end
 

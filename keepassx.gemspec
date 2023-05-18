@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n")
 
+  s.add_runtime_dependency 'argon2', '2.2.0'
   s.add_runtime_dependency 'zeitwerk'
 
   s.add_development_dependency 'factory_bot'
